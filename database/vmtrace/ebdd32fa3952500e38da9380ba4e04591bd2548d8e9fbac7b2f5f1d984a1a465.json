@@ -1,8 +1,0 @@
-[ {
-  "op" : "STOP",
-  "pc" : "0",
-  "gas" : "124388",
-  "stack" : [ ],
-  "memory" : "",
-  "storage" : { }
-} ]

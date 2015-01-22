@@ -1,8 +1,0 @@
-[ {
-  "op" : "PUSH1",
-  "pc" : "0",
-  "gas" : "0",
-  "stack" : [ ],
-  "memory" : "",
-  "storage" : { }
-} ]
