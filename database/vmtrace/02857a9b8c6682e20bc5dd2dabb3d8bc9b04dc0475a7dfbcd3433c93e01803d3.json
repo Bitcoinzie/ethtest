@@ -1,0 +1,64 @@
+[ {
+  "op" : "PUSH1",
+  "pc" : "0",
+  "gas" : "226",
+  "stack" : [ ],
+  "memory" : "",
+  "storage" : { }
+}, {
+  "op" : "PUSH1",
+  "pc" : "2",
+  "gas" : "225",
+  "stack" : [ "05" ],
+  "memory" : "",
+  "storage" : { }
+}, {
+  "op" : "JUMP",
+  "pc" : "4",
+  "gas" : "224",
+  "stack" : [ "13", "05" ],
+  "memory" : "",
+  "storage" : { }
+}, {
+  "op" : "JUMPDEST",
+  "pc" : "19",
+  "gas" : "223",
+  "stack" : [ "05" ],
+  "memory" : "",
+  "storage" : { }
+}, {
+  "op" : "PUSH20",
+  "pc" : "20",
+  "gas" : "222",
+  "stack" : [ "05" ],
+  "memory" : "",
+  "storage" : { }
+}, {
+  "op" : "PUSH1",
+  "pc" : "41",
+  "gas" : "221",
+  "stack" : [ "16e27e57e73bf8eb2b14579e9a573a0a30c84218", "05" ],
+  "memory" : "",
+  "storage" : { }
+}, {
+  "op" : "DUP2",
+  "pc" : "43",
+  "gas" : "220",
+  "stack" : [ "", "16e27e57e73bf8eb2b14579e9a573a0a30c84218", "05" ],
+  "memory" : "",
+  "storage" : { }
+}, {
+  "op" : "SWAP1",
+  "pc" : "44",
+  "gas" : "219",
+  "stack" : [ "16e27e57e73bf8eb2b14579e9a573a0a30c84218", "", "16e27e57e73bf8eb2b14579e9a573a0a30c84218", "05" ],
+  "memory" : "",
+  "storage" : { }
+}, {
+  "op" : "SSTORE",
+  "pc" : "45",
+  "gas" : "218",
+  "stack" : [ "", "16e27e57e73bf8eb2b14579e9a573a0a30c84218", "16e27e57e73bf8eb2b14579e9a573a0a30c84218", "05" ],
+  "memory" : "",
+  "storage" : { }
+} ]
