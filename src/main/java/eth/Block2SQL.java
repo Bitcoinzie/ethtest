@@ -1,12 +1,12 @@
 package eth;
 
-import static eth.EthTest.ethereum;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import org.ethereum.core.Block;
+import org.ethereum.facade.Ethereum;
 import org.ethereum.listener.EthereumListenerAdapter;
 import org.spongycastle.util.encoders.Hex;
 
@@ -18,7 +18,7 @@ public class Block2SQL extends EthereumListenerAdapter{
 
     //This is not the correct way to do this, but works for testing
     //TODO: Fix it.
-    public static void main(String[] args) throws IOException {
+    public static void runBlock2SQL(Ethereum ethereum) throws IOException {
         ethereum.addListener(new Block2SQL());
         System.out.println("Block2SQL is running");
 
