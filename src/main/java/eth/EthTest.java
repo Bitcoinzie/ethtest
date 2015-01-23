@@ -39,6 +39,8 @@ public class EthTest extends EthereumListenerAdapter {
         }
         });
         t.start();
+        //This is not the correct way to do this, but works for testing
+        //TODO: Fix it.
         Block2SQL.main(args);
         
         int i = 0;//Just something to use as a simple iterator
