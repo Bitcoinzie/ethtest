@@ -23,8 +23,8 @@ import org.spongycastle.util.encoders.Hex;
  *
  * @author Bitcoinzie
  */
-public class EthTest {
-    public static Ethereum ethereum;
+public class EthTest extends EthereumListenerAdapter {
+    static Ethereum ethereum;
     
     public static void main(String[] args) throws IOException, InterruptedException {
         ethereum =  EthereumFactory.createEthereum();
@@ -44,6 +44,7 @@ public class EthTest {
         }
         });
         t.start();
+        Block2SQL.main(args);
         
         int i = 0;//Just something to use as a simple iterator
         
