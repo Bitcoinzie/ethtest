@@ -16,7 +16,8 @@ import org.spongycastle.util.encoders.Hex;
  */
 public class Block2SQL extends EthereumListenerAdapter{
 
-
+    //This is not the correct way to do this, but works for testing
+    //TODO: Fix it.
     public static void main(String[] args) throws IOException {
         ethereum.addListener(new Block2SQL());
         System.out.println("Block2SQL is running");
