@@ -14,9 +14,9 @@ import org.spongycastle.util.encoders.Hex;
  * Based on methods from http://forum.ethergit.com/discussion/7/how-to-parse-blocks-data-to-sql RomanJ
  * @author Bitcoinzie
  */
-public class Block2SQL extends EthereumListenerAdapter{
-
-
+public class Block2SQL extends EthereumListenerAdapter {
+    
+    //Listens for and writes blocks to a file named block-sql.txt as they come in from the net.
     public static void runBlock2SQL(Ethereum ethereum) throws IOException {
         ethereum.addListener(new Block2SQL());
         System.out.println("Block2SQL is running");
