@@ -24,7 +24,7 @@ public class Block2SQL extends EthereumListenerAdapter{
     }
 
 
-@Override
+    @Override
     public void onBlock(Block block) {
 
         Writer writer = null;

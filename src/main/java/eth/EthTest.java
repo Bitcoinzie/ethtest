@@ -4,6 +4,7 @@ package eth;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import javax.swing.SwingUtilities;
 import static org.ethereum.config.SystemProperties.CONFIG;
 import org.ethereum.core.Account;
 import static org.ethereum.core.Denomination.toFriendlyString;
@@ -23,13 +24,10 @@ public class EthTest extends EthereumListenerAdapter {
     
     public static void main(String[] args) throws IOException, InterruptedException {
         ethereum =  EthereumFactory.createEthereum();
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                ethereum.connect(CONFIG.activePeerIP(), 
-                        CONFIG.activePeerPort());
-            }
-        };
+        SwingUtilities.invokeLater(() -> {
+            ethereum.connect(CONFIG.activePeerIP(),
+                    CONFIG.activePeerPort());
+        });
         ethereum.addListener(new EthereumListenerAdapter() {
         @Override
         public void trace(final String output) {
@@ -38,7 +36,6 @@ public class EthTest extends EthereumListenerAdapter {
             }
         }
         });
-        t.start();
         
         Block2SQL.runBlock2SQL(ethereum);
         
