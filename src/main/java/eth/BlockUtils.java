@@ -6,7 +6,11 @@
 package eth;
 
 import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 import org.ethereum.core.Block;
+import org.ethereum.core.Transaction;
+import org.ethereum.util.ByteUtil;
+import org.ethereum.util.Utils;
 import org.spongycastle.util.encoders.Hex;
 
 /**
@@ -43,27 +47,27 @@ public class BlockUtils {
     
     public static String blockHash(Long blockindex) throws InterruptedException {
         Block block = block(blockindex);
-        return Hex.toHexString(block.getHash());
+        return ByteUtil.toHexString(block.getHash());
     }
     
     public static String uncHash(Long blockindex) throws InterruptedException {
         Block block = block(blockindex);
-        return Hex.toHexString(block.getUnclesHash());
+        return ByteUtil.toHexString(block.getUnclesHash());
     }
     
     public static String blockNonce(Long blockindex) throws InterruptedException {
         Block block = block(blockindex);
-        return Hex.toHexString(block.getNonce());
+        return ByteUtil.toHexString(block.getNonce());
     }
     
     public static String blockState(Long blockindex) throws InterruptedException {
         Block block = block(blockindex);
-        return Hex.toHexString(block.getStateRoot());
+        return ByteUtil.toHexString(block.getStateRoot());
     }
     
-    public static Long blockTime(Long blockindex) throws InterruptedException {
+    public static String blockTime(Long blockindex) throws InterruptedException {
         Block block = block(blockindex);
-        return block.getTimestamp();
+        return Utils.longToDateTime(block.getTimestamp());
     }
     
     public static Long blockGas(Long blockindex) throws InterruptedException {
@@ -78,22 +82,27 @@ public class BlockUtils {
     
     public static String txTrRoot(Long blockindex) throws InterruptedException {
         Block block = block(blockindex);
-        return Hex.toHexString(block.getTxTrieRoot());
+        return ByteUtil.toHexString(block.getTxTrieRoot());
     }
     
-    public static String blockBase(Long blockindex) throws InterruptedException {
+    public static String blockMiner(Long blockindex) throws InterruptedException {
         Block block = block(blockindex);
-        return Hex.toHexString(block.getCoinbase());
+        return ByteUtil.toHexString(block.getCoinbase());
     }
     
     public static String blockDif(Long blockindex) throws InterruptedException {
         Block block = block(blockindex);
-        return Hex.toHexString(block.getDifficulty());
+        return ByteUtil.toHexString(block.getDifficulty());
     }
     
     public static String blockLBloom(Long blockindex) throws InterruptedException {
         Block block = block(blockindex);
-        return Hex.toHexString(block.getLogBloom());
+        return ByteUtil.toHexString(block.getLogBloom());
+    }
+    
+    public static String parentHash(Long blockindex) throws InterruptedException {
+        Block block = block(blockindex);
+         return ByteUtil.toHexString(block.getParentHash());
     }
     
     public static String blockEncoded(Long blockindex) throws InterruptedException {
@@ -105,5 +114,6 @@ public class BlockUtils {
         Block block = block(blockindex);
         return block.getExtraData();
     }
+    
 
 }

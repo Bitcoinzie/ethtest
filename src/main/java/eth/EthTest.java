@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 import static org.ethereum.config.SystemProperties.CONFIG;
 import org.ethereum.core.Account;
 import static org.ethereum.core.Denomination.toFriendlyString;
+import org.ethereum.core.Transaction;
 import org.ethereum.facade.Ethereum;
 import org.ethereum.facade.EthereumFactory;
 import org.ethereum.listener.EthereumListenerAdapter;
@@ -50,15 +51,18 @@ public class EthTest extends EthereumListenerAdapter {
         Account acnt1 = accounts.get(i+1);
         AccountStateUtils.addNew();
         ArrayList<Account> accountsNew = AccountStateUtils.wallet();
+        ArrayList<Transaction> t = null;
         Account acnt2 = accountsNew.get(i+2);
         //byte [] ac = acnt0.getBytes();
         BigInteger nonce = AccountStateUtils.countAt(Hex.toHexString(acnt0.getEcKey().getAddress()).getBytes());
         System.out.println("Account 1 Nonce: " + nonce);
         Long num = 23L;
+        
         System.out.println(BlockUtils.block(num));
         System.out.println(BlockUtils.uncle(num));
         System.out.println("Disecting the block #" + num);
         System.out.println("hash,\n" + BlockUtils.blockHash(num));
+        System.out.println("parent hash,\n" + BlockUtils.parentHash(num));
         System.out.println("uncle hash,\n" + BlockUtils.uncHash(num));
         System.out.println("nonce,\n" + BlockUtils.blockNonce(num));
         System.out.println("state_root,\n" + BlockUtils.blockState(num));
@@ -66,13 +70,13 @@ public class EthTest extends EthereumListenerAdapter {
         System.out.println("time_stamp,\n" + BlockUtils.blockTime(num));
         System.out.println("gas_limit,\n" + BlockUtils.blockGas(num));
         System.out.println("gas_used,\n" + BlockUtils.gasUsed(num));
-        System.out.println("miner,\n" + BlockUtils.blockBase(num));
+        System.out.println("miner,\n" + BlockUtils.blockMiner(num));
         System.out.println("difficulty,\n" + BlockUtils.blockDif(num));
         System.out.println("extra_data,\n" + Arrays.toString(BlockUtils.blockData(num)));
         System.out.println("bloom_filter,\n" + BlockUtils.blockLBloom(num));
         System.out.println("rlp,\n" + BlockUtils.blockEncoded(num));
+        System.out.println("Transactions,\n" + TransUtils.blockTransactions(num, t));
         
-        //list all addresses to all accounts on the network
         System.out.println(Hex.toHexString(ethereum.getRepository().getAccountsKeys().iterator().next()));
         
         //This call (balanceAt) is sent a 20 character Hex string 
