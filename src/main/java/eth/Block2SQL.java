@@ -11,7 +11,7 @@ import org.ethereum.listener.EthereumListenerAdapter;
 import org.spongycastle.util.encoders.Hex;
 
 /**
- * Based on methods from http://forum.ethergit.com/discussion/7/how-to-parse-blocks-data-to-sql @Roman
+ * Based on methods from http://forum.ethergit.com/discussion/7/how-to-parse-blocks-data-to-sql RomanJ
  * @author Bitcoinzie
  */
 public class Block2SQL extends EthereumListenerAdapter{
