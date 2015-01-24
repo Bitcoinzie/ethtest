@@ -44,7 +44,7 @@ public class EthTest extends EthereumListenerAdapter {
         //arraylist to store the accounts
         ArrayList<Account> accounts = AccountStateUtils.wallet();
         
-        //Eventual loop to assign accounts
+        //Assign accounts
         Account acnt0 = accounts.get(i);
         Account acnt1 = accounts.get(i+1);
         AccountStateUtils.addNew();
