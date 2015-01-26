@@ -13,7 +13,7 @@ import org.spongycastle.util.encoders.Hex;
  * @author Bitcoinzie
  */
 public class BlockUtils {
-    
+    //TODO: include get block info by hash    
     private BlockUtils() {
     }
     

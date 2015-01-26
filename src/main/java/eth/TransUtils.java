@@ -14,6 +14,9 @@ import org.ethereum.util.ByteUtil;
  * @author Bitcoinzie
  */
 public class TransUtils {
+    //TODO: include get block info by hash
+    private TransUtils(){
+    }
     
     //static ArrayList<Transaction> t;
     public static ArrayList<Transaction> blockTransactions(Long blockindex, ArrayList<Transaction> t) throws InterruptedException {
