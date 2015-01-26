@@ -1,18 +1,17 @@
 package eth;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.ethereum.core.Account;
 import static org.ethereum.core.Denomination.toFriendlyString;
 import org.ethereum.core.Wallet;
 import org.ethereum.db.ContractDetails;
 import org.ethereum.facade.Repository;
-import org.ethereum.util.Utils;
-
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
 import org.ethereum.net.peerdiscovery.PeerInfo;
+import org.ethereum.util.Utils;
 import static org.ethereum.util.Utils.hexStringToDecimalString;
 import org.ethereum.vm.DataWord;
 

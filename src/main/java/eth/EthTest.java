@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.SwingUtilities;
+
 import static org.ethereum.config.SystemProperties.CONFIG;
 import org.ethereum.core.Account;
 import static org.ethereum.core.Denomination.toFriendlyString;
@@ -14,6 +15,7 @@ import org.ethereum.facade.Ethereum;
 import org.ethereum.facade.EthereumFactory;
 import org.ethereum.listener.EthereumListenerAdapter;
 import org.ethereum.vm.DataWord;
+
 import org.spongycastle.util.encoders.Hex;
 
 
