@@ -51,7 +51,7 @@ public class AccountStateUtils {
     
     /**
      *
-     * @param str hex string representing a value in the format 0x21 to be converted to decimal 15
+     * @param str hex string representing a value in the format 0x21 to be converted to decimal in the format 15
      * @return  string representation of a decimal number
      */
         public static String toDecimal(String str) {
