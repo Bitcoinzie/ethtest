@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.SwingUtilities;
+import org.ethereum.config.SystemProperties;
 
 import static org.ethereum.config.SystemProperties.CONFIG;
 import org.ethereum.core.Account;
@@ -29,8 +30,8 @@ public class EthTest extends EthereumListenerAdapter {
     public static void main(String[] args) throws IOException, InterruptedException {
         ethereum =  EthereumFactory.createEthereum();
         SwingUtilities.invokeLater(() -> {
-            ethereum.connect(CONFIG.activePeerIP(),
-                    CONFIG.activePeerPort());
+            ethereum.connect("5.1.83.141",
+                    SystemProperties.CONFIG.activePeerPort());
         });
         ethereum.addListener(new EthereumListenerAdapter() {
         @Override
@@ -60,6 +61,11 @@ public class EthTest extends EthereumListenerAdapter {
         System.out.println("Account 1 Nonce: " + nonce);
         Long num = 23L;
         
+        System.out.println("Connected to: " + AccountStateUtils.peerCount() + " Peers");
+        while(AccountStateUtils.peerCount() == 0) {
+            System.out.println("Attempting to connect to peers at" + " " + CONFIG.activePeerIP() + " " +CONFIG.activePeerPort());
+        }
+        System.out.println("Connected to: " + AccountStateUtils.peerCount() + " Peers");
         System.out.println(BlockUtils.block(num));
         System.out.println(BlockUtils.uncle(num));
         System.out.println("Disecting the block #" + num);
@@ -100,7 +106,7 @@ public class EthTest extends EthereumListenerAdapter {
         //Just printing our results from above.. we'll do something with the data we generated later
         System.out.println(AccountStateUtils.toDecimal("0x15"));
         System.out.println(AccountStateUtils.toDecimal("0x657468657265756d000000000000000000000000000000000000000000000000"));
-        System.out.println("Connected to: " + AccountStateUtils.peerCount() + " Peers");
+        
         System.out.println(accounts);
         System.out.println(accountsNew);
         System.out.println("Account 1: " + Hex.toHexString(acnt0.getEcKey().getAddress()).toUpperCase());
