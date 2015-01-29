@@ -36,6 +36,7 @@ public class BlockUtils {
      */
     public static Block block(Long blockindex) throws InterruptedException {
         while(blockindex>EthTest.ethereum.getBlockchain().getSize()){
+            System.out.println("Waiting for blocks sleep(10L)");
             sleep(10L);  
         }return EthTest.ethereum.getBlockchain().getBlockByNumber(blockindex);
     }
