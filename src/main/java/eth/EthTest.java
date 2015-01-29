@@ -14,7 +14,7 @@ import static org.ethereum.core.Denomination.toFriendlyString;
 import org.ethereum.core.Transaction;
 import org.ethereum.facade.Ethereum;
 import org.ethereum.facade.EthereumFactory;
-import org.ethereum.listener.EthereumListenerAdapter;
+import org.ethereum.listener.CompositeEthereumListener;
 import org.ethereum.vm.DataWord;
 
 import org.spongycastle.util.encoders.Hex;
@@ -24,7 +24,7 @@ import org.spongycastle.util.encoders.Hex;
  *
  * @author Bitcoinzie
  */
-public class EthTest extends EthereumListenerAdapter {
+public class EthTest extends CompositeEthereumListener {
     static Ethereum ethereum;
     
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -33,7 +33,7 @@ public class EthTest extends EthereumListenerAdapter {
             ethereum.connect("5.1.83.141",
                     SystemProperties.CONFIG.activePeerPort());
         });
-        ethereum.addListener(new EthereumListenerAdapter() {
+        ethereum.addListener(new CompositeEthereumListener() {
         @Override
         public void trace(final String output) {
             if (output != null){
@@ -93,7 +93,7 @@ public class EthTest extends EthereumListenerAdapter {
         BigInteger bal2 = AccountStateUtils.balanceAt(Hex.toHexString(acnt2.getEcKey().getAddress()));
         
         DataWord key = new DataWord(acnt0.getEcKey().getPrivKeyBytes());
-        System.out.println("Storage at " + acnt0 + " is " + AccountStateUtils.storageAt(Hex.toHexString(acnt0.getEcKey().getAddress()).getBytes(), key));
+        System.out.println("Storage at " + Hex.toHexString(acnt0.getAddress()) + " is " + AccountStateUtils.storageAt(Hex.toHexString(acnt0.getEcKey().getAddress()).getBytes(), key));
        
         //This call can be sent like above 
         byte[] code = AccountStateUtils.codeAt(Hex.toHexString(acnt0.getEcKey().getAddress()));
