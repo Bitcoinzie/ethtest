@@ -3,7 +3,7 @@
 
 # Gradle
 .gradle
-/.nb-gradle/private/
+.nb-gradle/private/
 /build/
 
 # IDEA
