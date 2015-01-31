@@ -3,6 +3,7 @@ package eth;
 import static java.lang.Thread.sleep;
 
 import org.ethereum.core.Block;
+import org.ethereum.facade.Ethereum;
 import org.ethereum.util.ByteUtil;
 import org.ethereum.util.Utils;
 
@@ -16,6 +17,7 @@ public class BlockUtils {
     //TODO: include get block info by hash    
     private BlockUtils() {
     }
+    private static final Ethereum ethereum = EthTest.ethereum;
     
     /**
      *
@@ -35,10 +37,14 @@ public class BlockUtils {
      * @throws InterruptedException
      */
     public static Block block(Long blockindex) throws InterruptedException {
-        while(blockindex>EthTest.ethereum.getBlockchain().getSize()){
-            System.out.println("Waiting for blocks sleep(10L)");
+        Boolean prin = true;
+        while(blockindex>ethereum.getBlockchain().getSize()){
+            if (prin){
+                System.out.println("Sleeping until enough Blocks recieved");
+                prin = false;
+            }
             sleep(10L);  
-        }return EthTest.ethereum.getBlockchain().getBlockByNumber(blockindex);
+        }return ethereum.getBlockchain().getBlockByNumber(blockindex);
     }
     
     public static String blockHash(Long blockindex) throws InterruptedException {

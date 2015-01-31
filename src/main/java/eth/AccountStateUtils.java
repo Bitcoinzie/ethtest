@@ -6,9 +6,12 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.ethereum.core.Account;
+import org.ethereum.core.AccountState;
 import static org.ethereum.core.Denomination.toFriendlyString;
 import org.ethereum.core.Wallet;
 import org.ethereum.db.ContractDetails;
+import org.ethereum.facade.Ethereum;
+import org.ethereum.facade.EthereumFactory;
 import org.ethereum.facade.Repository;
 import org.ethereum.net.peerdiscovery.PeerInfo;
 import org.ethereum.util.Utils;
@@ -22,6 +25,12 @@ import org.ethereum.vm.DataWord;
  */
 public class AccountStateUtils {
     
+    private static final Ethereum ethereum = EthTest.ethereum;
+    private static final Wallet wallet = ethereum.getWallet();
+    private static final Repository repository = ethereum.getRepository();
+    private static final ArrayList acntList = new ArrayList<>();
+    private static Account account;
+    
     private AccountStateUtils() {
     }
     
@@ -30,12 +39,11 @@ public class AccountStateUtils {
      * @return ArrayList<byte[]> returns ArrayList of owned Accounts
      */
     public static ArrayList<Account> wallet(){
-        Wallet wallet = EthTest.ethereum.getWallet();
-        ArrayList acntList = new ArrayList<>();
-        Account account;
-        for (Iterator<Account> it = wallet.getAccountCollection().iterator(); it.hasNext();) {
+        for(Iterator<Account> it = wallet.getAccountCollection().iterator(); it.hasNext();) {
             account = it.next();
-            acntList.add(account);
+            System.out.println(account);
+             if(!acntList.contains(account))
+                 acntList.add(account);
         }
         return acntList;
     }
@@ -45,8 +53,13 @@ public class AccountStateUtils {
      * Adds new account to the users wallet
      */
     public static void addNew() {
-        Wallet wallet = EthTest.ethereum.getWallet();
         wallet.addNewAccount();
+    }
+    
+    //avoids null pointer when getting balance by Account.getBalance
+    public static void saveAcnt(byte[] addr){
+        repository.addBalance(addr, BigInteger.ZERO);
+        repository.createAccount(addr);
     }
     
     /**
@@ -64,10 +77,9 @@ public class AccountStateUtils {
      * @return returns BigInt value at the given account
      */
     public static BigInteger balanceAt(String address) {
-        Repository repository = EthTest.ethereum.getRepository();
 	byte[] addr = Utils.addressStringToBytes(address);
 	if(!repository.isExist(addr)){
-            return null;
+            return repository.getBalance(addr);
         }else{            
             return repository.getBalance(addr);
         }
@@ -80,8 +92,7 @@ public class AccountStateUtils {
      * @return the values stored or null if empty
      */
     public static DataWord storageAt(byte[] addr, DataWord key) {
-        Repository repository = EthTest.ethereum.getRepository();
-        return repository.getStorageValue(addr, key);
+         return repository.getStorageValue(addr, key);
     }
     
     /**
@@ -96,7 +107,7 @@ public class AccountStateUtils {
 	byte[] addr = Utils.addressStringToBytes(address);
 	
 	//Get the repository and return the contract details of the address provided
-	ContractDetails contractDetails = EthTest.ethereum.getRepository().getContractDetails(addr);
+	ContractDetails contractDetails = repository.getContractDetails(addr);
 	
 	//Get the code from inside the contract details and assign it to a byte array
 	final byte[] programCode = contractDetails.getCode();
@@ -109,7 +120,7 @@ public class AccountStateUtils {
      * @return nonce BigInteger transactions nonce
      */
     public static BigInteger countAt(byte[] addr) {
-        return EthTest.ethereum.getRepository().getNonce(addr); 
+        return repository.getNonce(addr); 
     }
   
     /**
@@ -117,7 +128,7 @@ public class AccountStateUtils {
      * @return int value representing the number of peers this client is connected to
      */
     public static int peerCount() {
-        Set<PeerInfo> peers = EthTest.ethereum.getPeers();
+        Set<PeerInfo> peers = ethereum.getPeers();
         return peers.size();
     }
     

@@ -8,14 +8,14 @@ import java.io.Writer;
 
 import org.ethereum.core.Block;
 import org.ethereum.facade.Ethereum;
-import org.ethereum.listener.EthereumListenerAdapter;
+import org.ethereum.listener.CompositeEthereumListener;
 import org.spongycastle.util.encoders.Hex;
 
 /**
  * Based on methods from http://forum.ethergit.com/discussion/7/how-to-parse-blocks-data-to-sql RomanJ
  * @author Bitcoinzie
  */
-public class Block2SQL extends EthereumListenerAdapter {
+public class Block2SQL extends CompositeEthereumListener {
     
     //Listens for and writes blocks to a file named block-sql.txt as they come in from the net.
     public static void runBlock2SQL(Ethereum ethereum) throws IOException {
