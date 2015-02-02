@@ -1,22 +1,37 @@
-package eth;
+/*
+The MIT License (MIT)
 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+package eth;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.SwingUtilities;
-import org.ethereum.config.SystemProperties;
-
-import static org.ethereum.config.SystemProperties.CONFIG;
 import org.ethereum.core.Account;
-import org.ethereum.core.AccountState;
 import static org.ethereum.core.Denomination.toFriendlyString;
 import org.ethereum.core.Transaction;
-import org.ethereum.core.Wallet;
 import org.ethereum.facade.Ethereum;
 import org.ethereum.facade.EthereumFactory;
-import org.ethereum.listener.CompositeEthereumListener;
 import org.ethereum.vm.DataWord;
 
 import org.spongycastle.util.encoders.Hex;
@@ -45,16 +60,20 @@ public class EthTest {
         
         //Assign accounts
         Account acnt0 = accounts.get(i);
-        Account acnt1 = accounts.get(i+1);
+        Account acnt1 = accounts.get(++i);
+        
+        //Add a new account
         AccountStateUtils.addNew();
         System.out.println(accounts);
+        
+        //Re-Assign Accounts
         accounts = AccountStateUtils.wallet();
         System.out.println(accounts);
         ArrayList<Transaction> t = null;
-        Account acnt2 = accounts.get(i+2);
+        Account acnt2 = accounts.get(++i);
         
         AccountStateUtils.saveAcnt(acnt2.getAddress());
-        BigInteger nonce = AccountStateUtils.countAt(Hex.toHexString(acnt0.getEcKey().getAddress()).getBytes());
+        BigInteger nonce = AccountStateUtils.countAt(acnt0.getAddress());
         System.out.println("Account 1 Nonce: " + nonce);
         Long num = 23L;
         
@@ -99,12 +118,17 @@ public class EthTest {
         BigInteger bal2 = AccountStateUtils.balanceAt(Hex.toHexString(acnt2.getEcKey().getAddress()));
 
         System.out.println("New Account is: " + acnt2);
+        /*
+        * acnt2.getBalance()); new accounts cause nullpointer exception when queried from withing the Account
+        * So for now we get the balance of an new account by calling the repository and getting the balance at address: 
+        * ethereum.getRepository().getBalance(acnt2.getAddress())
+        */
         System.out.println("New Acnt Bal: " + ethereum.getRepository().getBalance(acnt2.getAddress()));
         System.out.println("Acnt1 Bal: " + acnt0.getBalance());
         System.out.println("Acnt2 Bal: " + acnt1.getBalance());
         
         DataWord key = new DataWord(acnt0.getEcKey().getPrivKeyBytes());
-        System.out.println("Storage at " + Hex.toHexString(acnt0.getAddress()) + " is " + AccountStateUtils.storageAt(Hex.toHexString(acnt0.getEcKey().getAddress()).getBytes(), key));
+        System.out.println("Storage at " + Hex.toHexString(acnt0.getAddress()) + " is " + AccountStateUtils.storageAt((acnt0.getAddress()), key));
        
         byte[] code = AccountStateUtils.codeAt(Hex.toHexString(acnt0.getAddress()));
         if (code.length == 0){
