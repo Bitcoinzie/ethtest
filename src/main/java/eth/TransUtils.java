@@ -22,13 +22,13 @@ THE SOFTWARE.
 
 package eth;
 
-import static eth.BlockUtils.block;
-
-import java.util.ArrayList;
-
 import org.ethereum.core.Block;
 import org.ethereum.core.Transaction;
 import org.ethereum.util.ByteUtil;
+
+import static eth.BlockUtils.block;
+
+import java.util.ArrayList;
 
 /**
  *

@@ -22,8 +22,6 @@ THE SOFTWARE.
 
 package eth;
 
-import static java.lang.Thread.sleep;
-
 import org.ethereum.core.Block;
 import org.ethereum.facade.Ethereum;
 import org.ethereum.util.ByteUtil;
@@ -31,15 +29,18 @@ import org.ethereum.util.Utils;
 
 import org.spongycastle.util.encoders.Hex;
 
+import static java.lang.Thread.sleep;
+
 /**
  *
  * @author Bitcoinzie
  */
 public class BlockUtils {
+    private static final Ethereum eth = EthTest.eth;
     //TODO: include get block info by hash    
     private BlockUtils() {
+       
     }
-    private static final Ethereum ethereum = EthTest.ethereum;
     
     /**
      *
@@ -60,13 +61,13 @@ public class BlockUtils {
      */
     public static Block block(Long blockindex) throws InterruptedException {
         Boolean prin = true;
-        while(blockindex>ethereum.getBlockchain().getSize()){
+        while(blockindex > eth.getBlockchain().getSize() - 1){
             if (prin){
                 System.out.println("Sleeping until enough Blocks recieved");
                 prin = false;
             }
             sleep(10L);  
-        }return ethereum.getBlockchain().getBlockByNumber(blockindex);
+        }return eth.getBlockchain().getBlockByNumber(blockindex);
     }
     
     public static String blockHash(Long blockindex) throws InterruptedException {

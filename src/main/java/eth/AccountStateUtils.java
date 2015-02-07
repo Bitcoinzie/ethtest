@@ -22,11 +22,6 @@ THE SOFTWARE.
 
 package eth;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
-
 import org.ethereum.core.Account;
 import static org.ethereum.core.Denomination.toFriendlyString;
 import org.ethereum.core.Wallet;
@@ -38,6 +33,11 @@ import org.ethereum.util.Utils;
 import static org.ethereum.util.Utils.hexStringToDecimalString;
 import org.ethereum.vm.DataWord;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
 
 /**
  *
@@ -45,9 +45,9 @@ import org.ethereum.vm.DataWord;
  */
 public class AccountStateUtils {
     
-    private static final Ethereum ethereum = EthTest.ethereum;
-    private static final Wallet wallet = ethereum.getWallet();
-    private static final Repository repository = ethereum.getRepository();
+    private static final Ethereum eth = EthTest.eth;
+    private static final Wallet wallet = eth.getWallet();
+    private static final Repository repository = eth.getRepository();
     private static final ArrayList acntList = new ArrayList<>();
     private static Account account;
     
@@ -74,6 +74,7 @@ public class AccountStateUtils {
      */
     public static void addNew() {
         wallet.addNewAccount();
+        
     }
     
     public static void importAc(Account acnt){
@@ -90,7 +91,7 @@ public class AccountStateUtils {
      * @param str hex string representing a value in the format 0x21 to be converted to decimal in the format 15
      * @return  string representation of a decimal number
      */
-        public static String toDecimal(String str) {
+    public static String toDecimal(String str) {
         return hexStringToDecimalString(str);
     }
     
@@ -145,13 +146,17 @@ public class AccountStateUtils {
     public static BigInteger countAt(byte[] addr) {
         return repository.getNonce(addr); 
     }
+    
+    public static BigInteger countAt(Account ac) {
+        return ac.getNonce(); 
+    }
   
     /**
      *
      * @return int value representing the number of peers this client is connected to
      */
     public static int peerCount() {
-        Set<PeerInfo> peers = ethereum.getPeers();
+        Set<PeerInfo> peers = eth.getPeers();
         return peers.size();
     }
     

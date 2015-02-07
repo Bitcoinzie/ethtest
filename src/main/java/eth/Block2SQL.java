@@ -21,16 +21,17 @@ THE SOFTWARE.
 */
 package eth;
 
+import org.ethereum.core.Block;
+import org.ethereum.facade.Ethereum;
+import org.ethereum.listener.CompositeEthereumListener;
+
+import org.spongycastle.util.encoders.Hex;
+
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-
-import org.ethereum.core.Block;
-import org.ethereum.facade.Ethereum;
-import org.ethereum.listener.CompositeEthereumListener;
-import org.spongycastle.util.encoders.Hex;
 
 /**
  * Based on methods from http://forum.ethergit.com/discussion/7/how-to-parse-blocks-data-to-sql RomanJ
