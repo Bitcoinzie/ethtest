@@ -137,7 +137,7 @@ public class EthTest {
                     * So for now we get the balance of an new account by calling the repository and getting the balance at address: 
                     * eth.getRepository().getBalance(acnt2.getAddress())
                     */
-                    System.out.println("New Acnt Bal: " + acnt2.getBalance());//eth.getRepository().getBalance(acnt2.getAddress()));
+                    System.out.println("New Acnt Bal: " + eth.getRepository().getBalance(acnt2.getAddress()));
                     System.out.println("Acnt1 Bal: " + acnt0.getBalance());
                     System.out.println("Acnt2 Bal: " + acnt1.getBalance());
 
