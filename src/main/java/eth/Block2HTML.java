@@ -94,8 +94,8 @@ public class Block2HTML extends CompositeEthereumListener {
             writer.write( "    <div id = \"rlp\"><span>RLP Encoded: </span><p>" + Hex.toHexString(block.getEncoded()) + "</p></div>\n");
             writer.write("  </div>\n"); 
             if(i>1)
-                writer.write("<div><a href=\"blocks" + (i - 1) + ".html\"><< Previous</a><a href=\"blocks" + (i + 1) +".html\">Next >></a></div>");
-            else{writer.write("<a href=\"blocks" + (i + 1) +".html\">Next >></a></div>");}
+                writer.write("<div id = \"footer\"><a href=\"blocks" + (i - 1) + ".html\"><< Previous</a>&nbsp;&nbsp;<a href=\"blocks" + (i + 1) +".html\">Next >></a></div>");
+            else{writer.write("<a href = \"blocks" + (i + 1) +".html\">Next >></a></div>");}
         } catch (IOException ex) {
             // report
         } finally {

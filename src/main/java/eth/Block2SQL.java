@@ -25,6 +25,8 @@ import org.ethereum.core.Block;
 import org.ethereum.facade.Ethereum;
 import org.ethereum.listener.CompositeEthereumListener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
 
 import java.io.BufferedWriter;
@@ -42,7 +44,8 @@ public class Block2SQL extends CompositeEthereumListener {
     //Listens for and writes blocks to a file named block-sql.txt as they come in from the net.
     public static void runBlock2SQL(Ethereum ethereum) throws IOException {
         ethereum.addListener(new Block2SQL());
-        System.out.println("Block2SQL is running");
+        Logger b2sql = LoggerFactory.getLogger("Block2SQL");
+        b2sql.info("Block2SQL is running");
 
     }
 
