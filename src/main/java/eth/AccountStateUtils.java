@@ -102,11 +102,7 @@ public class AccountStateUtils {
      */
     public static BigInteger balanceAt(String address) {
 	byte[] addr = Utils.addressStringToBytes(address);
-	if(!repository.isExist(addr)){
             return repository.getBalance(addr);
-        }else{            
-            return repository.getBalance(addr);
-        }
     }
     
     /**
