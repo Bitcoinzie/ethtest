@@ -36,7 +36,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.logging.Level;
 
 /**
  * Based on methods from http://forum.ethergit.com/discussion/7/how-to-parse-blocks-data-to-sql RomanJ
@@ -67,7 +66,7 @@ public class Block2HTML extends CompositeEthereumListener {
                         "<head>\n" +
                         "  <meta charset=\"utf-8\">\n" +
                         "\n" +
-                        "  <title>EthChain Explorer</title>\n" +
+                        "  <title>Exploring Block: " + block.getNumber() + "</title>\n" +
                         "  <meta name=\"description\" content=\"EthChain Explorer\">\n" +
                         "  <meta name=\"author\" content=\"EthChain Explorer\">\n" +
                         "\n" +
