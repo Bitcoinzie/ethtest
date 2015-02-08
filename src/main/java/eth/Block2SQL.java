@@ -53,52 +53,52 @@ public class Block2SQL extends CompositeEthereumListener {
     @Override
     public void onBlock(Block block) {
 
-        Writer writer = null;
+        Writer w = null;
 
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(
+            w = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream("block-sql.txt", true), "utf-8"));
 
 
-            writer.write( "INSERT INTO block (\n");
-            writer.write( "  number,\n");
-            writer.write( "  hash,\n");
-            writer.write( "  uncle_hash,\n");
-            writer.write( "  nonce,\n");
-            writer.write( "  state_root,\n");
-            writer.write( "  tx_trie_root,\n");
-            writer.write( "  time_stamp,\n");
-            writer.write( "  gas_limit,\n");
-            writer.write( "  gas_used,\n");
-            writer.write( "  miner,\n");
-            writer.write( "  difficulty,\n");
-            writer.write( "  extra_data,\n");
-            writer.write( "  bloom_filter,\n");
-            writer.write( "  rlp)\n");
+            w.write( "INSERT INTO block (\n");
+            w.write( "  number,\n");
+            w.write( "  hash,\n");
+            w.write( "  uncle_hash,\n");
+            w.write( "  nonce,\n");
+            w.write( "  state_root,\n");
+            w.write( "  tx_trie_root,\n");
+            w.write( "  time_stamp,\n");
+            w.write( "  gas_limit,\n");
+            w.write( "  gas_used,\n");
+            w.write( "  miner,\n");
+            w.write( "  difficulty,\n");
+            w.write( "  extra_data,\n");
+            w.write( "  bloom_filter,\n");
+            w.write( "  rlp)\n");
 
-            writer.write( "VALUES (\n");
-            writer.write("  '" + block.getNumber()+ "',\n");
-            writer.write("  '" + Hex.toHexString(block.getHash()) + "',\n");
-            writer.write("  '" + Hex.toHexString(block.getUnclesHash()) + "',\n");
-            writer.write("  '" + Hex.toHexString(block.getNonce()) + "',\n");
-            writer.write("  '" + Hex.toHexString(block.getStateRoot()) + "',\n");
-            writer.write("  '" + Hex.toHexString(block.getTxTrieRoot()) + "',\n");
-            writer.write("  " + block.getTimestamp()  + ",\n");
-            writer.write("  " + block.getGasLimit()  + ",\n");
-            writer.write("  " + block.getGasUsed()  + ",\n");
-            writer.write("  '" + Hex.toHexString(block.getCoinbase()) + "',\n");
-            writer.write("  '" + Hex.toHexString(block.getDifficulty()) + "',\n");
-            writer.write("  " + "NULL" + ",\n");
-            writer.write("  '" + Hex.toHexString(block.getLogBloom()) + "',\n");
-            writer.write("  '" + Hex.toHexString(block.getEncoded()) + "'\n");
-            writer.write( ");\n");
+            w.write( "VALUES (\n");
+            w.write("  '" + block.getNumber()+ "',\n");
+            w.write("  '" + Hex.toHexString(block.getHash()) + "',\n");
+            w.write("  '" + Hex.toHexString(block.getUnclesHash()) + "',\n");
+            w.write("  '" + Hex.toHexString(block.getNonce()) + "',\n");
+            w.write("  '" + Hex.toHexString(block.getStateRoot()) + "',\n");
+            w.write("  '" + Hex.toHexString(block.getTxTrieRoot()) + "',\n");
+            w.write("  " + block.getTimestamp()  + ",\n");
+            w.write("  " + block.getGasLimit()  + ",\n");
+            w.write("  " + block.getGasUsed()  + ",\n");
+            w.write("  '" + Hex.toHexString(block.getCoinbase()) + "',\n");
+            w.write("  '" + Hex.toHexString(block.getDifficulty()) + "',\n");
+            w.write("  " + "NULL" + ",\n");
+            w.write("  '" + Hex.toHexString(block.getLogBloom()) + "',\n");
+            w.write("  '" + Hex.toHexString(block.getEncoded()) + "'\n");
+            w.write( ");\n");
             
-            writer.write("\n");
-            writer.write("\n");
+            w.write("\n");
+            w.write("\n");
         } catch (IOException ex) {
             // report
         } finally {
-            try {writer.close();} catch (Exception ex) {}
+            try {w.close();} catch (Exception ex) {}
         }        
                 
     }

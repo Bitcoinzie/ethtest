@@ -44,8 +44,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
-
 /**
  *
  * @author Bitcoinzie
@@ -81,7 +79,7 @@ public class EthTest {
         SwingUtilities.invokeLater(() -> {
             eth.connect(ip, port);
         });
-        Block2HTML.runBlock2SQL(eth);
+        Block2HTML.runBlock2HTML(eth);
         eth.addListener(new CompositeEthereumListener() {
             @Override
             public void onSyncDone() {
@@ -185,13 +183,14 @@ public class EthTest {
                     user.info(AccountStateUtils.toEth(bal));
                     user.info("Now Connected to: " + AccountStateUtils.peerCount() + " Peers");
                     user.info(AccountStateUtils.countAt(acnt0).toString());
+                    
                     //user.info(wm.getRepository().getAccountState(acnt0.getAddress())); //nullpointer
                     //user.info(wm.getActivePeer().toString()); //nullpointer
                     //user.info(Arrays.toString(wm.getBlockchain().getBestBlock().getCoinbase())); //nullpointer
                     //user.info(wm.isBlockchainLoading()); //nullpointer
                     //WalletUtils.accountTest_1();
                     System.exit(0);
-                } catch (InterruptedException ex) {
+                } catch (InterruptedException e) {
                 }
             }
         });

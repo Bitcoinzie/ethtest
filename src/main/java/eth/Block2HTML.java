@@ -44,13 +44,13 @@ import java.io.Writer;
 public class Block2HTML extends CompositeEthereumListener {
     
     //Listens for and writes blocks to a file named block-sql.txt as they come in from the net.
-    private static final Logger blc = LoggerFactory.getLogger("Block2SQL");
-    static Writer writer = null;
+    private static final Logger blc = LoggerFactory.getLogger("Block2HTML");
+    static Writer w = null;
     FileInputStream in;
     int i = 1;
-    public static void runBlock2SQL(Ethereum ethereum) throws IOException {
+    public static void runBlock2HTML(Ethereum ethereum) throws IOException {
         ethereum.addListener(new Block2HTML());
-        blc.info("Block2SQL is running");
+        blc.info("Block2HTML is running");
     }
     @Override
     public void onBlock(Block block) {
@@ -58,9 +58,9 @@ public class Block2HTML extends CompositeEthereumListener {
         if(!f.exists()){
         try {
             
-            writer = new BufferedWriter(new OutputStreamWriter(
+            w = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream("blocks/blocks" + i + ".html", true), "utf-8"));
-            writer.write("<!doctype html>\n" +
+            w.write("<!doctype html>\n" +
                         "\n" +
                         "<html lang=\"en\">\n" +
                         "<head>\n" +
@@ -77,32 +77,32 @@ public class Block2HTML extends CompositeEthereumListener {
                             "<header>\n" +
                                 "<div id = \"logo\"></div>\n" +
                             "</header>\n");
-            writer.write("  <div id = \"blocks\">\n");
-            writer.write( "    <p>Block Number: " + block.getNumber() + "</p>\n");
-            writer.write( "    <p>Block Hash: "+ Hex.toHexString(block.getHash()) + "</p>\n");
-            writer.write( "    <p>Uncle Hash: " + Hex.toHexString(block.getUnclesHash()) + "</p>\n");
-            writer.write( "    <p>Nonce: " + Hex.toHexString(block.getNonce()) + "</p>\n");
-            writer.write( "    <p>State Root: " + Hex.toHexString(block.getStateRoot()) + "</p>\n");
-            writer.write( "    <p>Tx Trie Root: " + Hex.toHexString(block.getTxTrieRoot()) + "</p>\n");
-            writer.write( "    <p>Time Stamp: " + block.getTimestamp() + "</p>\n");
-            writer.write( "    <p>Gas Limit: " + block.getGasLimit() + "</p>\n");
-            writer.write( "    <p>Gas Used: " + block.getGasUsed() + "</p>\n");
-            writer.write( "    <p>Miner Coinbase: " + Hex.toHexString(block.getCoinbase()) + "</p>\n");
-            writer.write( "    <p>Block Difficulty: " + AccountStateUtils.toDecimal("0x" + Hex.toHexString(block.getDifficulty())) + "</p>\n");
-            writer.write( "    <p>Extra Data: " + "NULL" + "</p>\n");
-            writer.write( "    <p>Bloom Filter: " + Hex.toHexString(block.getLogBloom()) + "</p>\n");
-            writer.write( "    <div id = \"rlp\"><span>RLP Encoded: </span><p>" + Hex.toHexString(block.getEncoded()) + "</p></div>\n");
-            writer.write("  </div>\n"); 
+            w.write("  <div id = \"blocks\">\n");
+            w.write( "    <p>Block Number: " + block.getNumber() + "</p>\n");
+            w.write( "    <p>Block Hash: "+ Hex.toHexString(block.getHash()) + "</p>\n");
+            w.write( "    <p>Uncle Hash: " + Hex.toHexString(block.getUnclesHash()) + "</p>\n");
+            w.write( "    <p>Nonce: " + Hex.toHexString(block.getNonce()) + "</p>\n");
+            w.write( "    <p>State Root: " + Hex.toHexString(block.getStateRoot()) + "</p>\n");
+            w.write( "    <p>Tx Trie Root: " + Hex.toHexString(block.getTxTrieRoot()) + "</p>\n");
+            w.write( "    <p>Time Stamp: " + block.getTimestamp() + "</p>\n");
+            w.write( "    <p>Gas Limit: " + block.getGasLimit() + "</p>\n");
+            w.write( "    <p>Gas Used: " + block.getGasUsed() + "</p>\n");
+            w.write( "    <p>Miner Coinbase: " + Hex.toHexString(block.getCoinbase()) + "</p>\n");
+            w.write( "    <p>Block Difficulty: " + AccountStateUtils.toDecimal("0x" + Hex.toHexString(block.getDifficulty())) + "</p>\n");
+            w.write( "    <p>Extra Data: " + "NULL" + "</p>\n");
+            w.write( "    <p>Bloom Filter: " + Hex.toHexString(block.getLogBloom()) + "</p>\n");
+            w.write( "    <div id = \"rlp\"><span>RLP Encoded: </span><p>" + Hex.toHexString(block.getEncoded()) + "</p></div>\n");
+            w.write("  </div>\n"); 
             if(i>1)
-                writer.write("<div id = \"footer\"><a href=\"blocks" + (i - 1) + ".html\"><< Previous</a>&nbsp;&nbsp;<a href=\"blocks" + (i + 1) +".html\">Next >></a></div>");
-            else{writer.write("<a href = \"blocks" + (i + 1) +".html\">Next >></a></div>");}
+                w.write("<div id = \"footer\"><a href=\"blocks" + (i - 1) + ".html\"><< Previous</a>&nbsp;&nbsp;<a href=\"blocks" + (i + 1) +".html\">Next >></a></div>");
+            else{w.write("<a href = \"blocks" + (i + 1) +".html\">Next >></a></div>");}
         } catch (IOException ex) {
             // report
         } finally {
             try {
-            writer.write("</body>\n" + "</html>");
+            w.write("</body>\n" + "</html>");
             i++;
-            writer.close();
+            w.close();
         }catch (Exception ex) {}
             
         }
